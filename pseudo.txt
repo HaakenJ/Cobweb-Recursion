@@ -1,0 +1,142 @@
+
+
+
+	theCobWeb *
+	    |
+	biggestWeb--------------
+          /    \                 \
+       item*   biggerWeb         otherBigWeb
+        /      /     \			\
+   'comb'* items   smallerWeb	       item
+             /         /     \		  \
+     ['glasses'etc]  item   tinyWeb      'headphones'
+                      /         \
+	     'toothbrush'       items
+				  \
+				['tonenails','lint','wrapper','homework']
+
+
+THECOBWEB
+
+first I will check if THECOBWEB is an object or is a primative
+
+if it is an object then I will search through its keys
+	
+	
+	BIGGESTWEB
+
+	I will check if the first key is an object or a primative.
+	
+		it is an object so I will search through its keys
+
+			
+			ITEM
+			
+			I will check if the first key is an object or a primative.
+		
+				the key contains a string
+		
+					I will check if this string is equal to what I am searching for.
+			
+					If it is what I am searching for, I will return the name of it's parent object (biggestWeb)
+					
+					If it is not what I am searching for then I will stop searching in this key.
+			
+
+			BIGGERWEB
+				
+			I will check if the second key is an object or a primative
+
+				it is an object so I will search through its keys
+
+					
+
+					ITEMS
+
+					I will check if this key is an object or a primative
+
+						the key contains an array
+
+							I will check if the array contains the string I am searching for
+
+							If it is what I am searching for, I will return the name of it's parent object (biggerWeb)
+						
+							If it is not what I am searching for then I will stop searching in this key.
+
+
+					SMALLERWEB
+					
+					I will check if this key is an object or a primative
+
+						this key is an object so I will search through its keys
+
+							
+
+							ITEM
+
+							I will check if this key is an object or a primative
+
+								this key is a string
+
+									I will check if this string is equal to what I am searching for.
+			
+									If it is what I am searching for, I will return the name of it's parent object (smallerWeb)
+					
+									If it is not what I am searching for then I will stop searching in this key.
+
+
+
+							TINYWEB
+
+							I will check if this key is an object or a primative
+
+								this key is an object so I will search through its keys
+
+									
+
+									ITEMS
+
+									I will check if this key is an object or a primative
+
+										the key contains an array
+
+											I will check if the array contains the string I am searching for
+
+											If it is what I am searching for, I will return the name of it's parent object (biggerWeb)
+						
+											If it is not what I am searching for then I will stop searching in this key.
+
+
+
+	OTHERBIGWEB
+
+	I will check if this key is an object or a primitive
+
+		this key is an object so I will search through its keys
+
+			
+
+			ITEM
+
+			I will check if this key is an object or a primitive
+
+				this key contains a string
+
+					I will check if this string is equal to what I am searching for.
+			
+					If it is what I am searching for, I will return the name of it's parent object (smallerWeb)
+					
+					If it is not what I am searching for then I will stop searching in this key.
+
+
+
+
+
+										
+
+							
+
+			
+	
+
+		
