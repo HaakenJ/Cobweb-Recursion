@@ -46,10 +46,8 @@ var theCobWeb = {
     //                                  ['tonenails','lint','wrapper','homework']
 
 
-let smallestWeb = '';
-let lastLevel = '';
-let exitCondition = 0;
-let returnedValue = '';
+let currentLevel = '',
+    itemFound = 0;
 
 function returnLastWeb(strPath) {
     var returnedWeb = '';
@@ -60,58 +58,44 @@ function returnLastWeb(strPath) {
 
 function findSmallestWeb(itemName, obj) {
     // Check if obj is an object or a primitive.
-    if (exitCondition === 1) {
-        return;
-    }
-    console.log('The current obj is: ' + obj);
-    if ((typeof obj) === 'object') {
-        // If it is an object then I will search through its properties.
-        console.log('The current obj is an Object.');
+    // console.log('The current obj is: ' + obj.constructor.name);
+    // if ((typeof obj) === 'object') {
+
+        /* This tests if the current object contains a string or array or
+            if it contains more objects. */
+    if (obj[0] === undefined) {
+
+        console.log('The current obj contains objects.');
         for (var i = 0; i < Object.keys(obj).length; i++) {
+            if (itemFound === 1) {
+                return returnLastWeb(currentLevel);
+            }
             /* I will then run this function on each property of the object.
                 This will again test if the containing properties are objects 
                 or primitives. */
-            if (lastLevel.length === 0) {
-                lastLevel += Object.keys(obj)[i];
+            if (currentLevel.length === 0) {
+                currentLevel += Object.keys(obj)[i];
             } else {
-                lastLevel += '.' + Object.keys(obj)[i];
+                currentLevel += '.' + Object.keys(obj)[i];
             }
-            console.log('lastLevel is currently: ' + lastLevel);
+            console.log('currentLevel is currently: ' + currentLevel);
             console.log('I will now seach through the property: ' + Object.keys(obj)[i]);
-            return findSmallestWeb(itemName, (_.get(theCobWeb, lastLevel)));
-        }
-    /* This is the case for if the obj passed in is a string or an array that
-        I can search through. */
-    } else {
-        // Now I look to see if the obj passed in includes the searched for item.
-        var lastPeriod = lastLevel.lastIndexOf('.');
-        console.log('The current obj is a/an: ' + (typeof obj));
-        if (obj.includes(itemName)) {
-            console.log('***********The item has been found.');
-            /* Here is where I would want to assign the name of the containing 
-            web object to the smallestWeb variable.*/
-            exitCondition = 1;
-            console.log(lastLevel.slice(lastPeriod + 1));
-            lastLevel = lastLevel.slice(0, lastPeriod);
-            return returnLastWeb(lastLevel);
-        // If the item is not found then I return, aka stop searching this branch.
-        } else {
-            console.log('++++++++++++The item is not in this array/string')
-            // if (!isNaN(lastLevel.slice(-1))) {
-            //     console.log('-----------This property is in an array.')
-            //     lastLevel = lastLevel.slice(0, lastLevel.lastIndexOf('.'));
-            //     console.log('The number has been removed: ' + lastLevel);
-            //     lastLevel = lastLevel.slice(0, lastLevel.lastIndexOf('.'));
-            //     
-            // } else {
-                lastLevel = lastLevel.slice(0, lastPeriod);
-                console.log('&&&&&&&&&&&& The lastLevel is now: ' + lastLevel);
+            if (Object.keys(obj)[i] === 'otherBigWeb') {
+                currentLevel = 'biggestWeb.otherBigWeb';
             }
-            
+            findSmallestWeb(itemName, (_.get(theCobWeb, currentLevel)));
+        }
+    } else {
+        console.log('The current obj contains strings or an array.');
+        console.log('The current obj is a/an: ' + (typeof obj));
+        console.log(obj);
+        if  (obj.includes(itemName)) {
+            console.log('Object Found in ' + returnLastWeb(currentLevel));
+            console.log(returnLastWeb(currentLevel));
+            itemFound = 1;
+            return returnLastWeb(currentLevel);
+        } else {
+            currentLevel = currentLevel.slice(0, currentLevel.lastIndexOf('.'));
         }
     }
-
-// To search through the next level I will want to pass "theCobWeb." + Object.keys(obj)[i] into the function.  This will give me the second level.includes
-// if I want to search through the next level I will need to store the value of Object.keys(obj)[i] or "biggestWeb" in a variable to use like this
-
-// "theCobWeb." + lastLevel + '.' + 
+}
